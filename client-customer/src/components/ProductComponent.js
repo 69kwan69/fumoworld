@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import withRouter from '../utils/withRouter';
 import loadingAnimation from '../assets/loading.gif';
+import MyContext from '../contexts/MyContext';
 
 class Product extends Component {
+  static contextType = MyContext; // using this.context to access global state
+
   constructor(props) {
     super(props);
     this.state = {
@@ -89,26 +92,30 @@ class Product extends Component {
   // apis
   apiGetProductsByCatID(cid) {
     this.setState({ loading: true });
-    axios.get('/api/customer/products/category/' + cid).then((res) => {
-      const result = res.data;
-      this.setState({
-        title: `${result[0].category.name} series`,
-        products: result,
-        loading: false,
+    axios
+      .get(this.context.url + '/api/customer/products/category/' + cid)
+      .then((res) => {
+        const result = res.data;
+        this.setState({
+          title: `${result[0].category.name} series`,
+          products: result,
+          loading: false,
+        });
       });
-    });
   }
 
   apiGetProductsByKeyword(keyword) {
     this.setState({ loading: true });
-    axios.get('/api/customer/products/search/' + keyword).then((res) => {
-      const result = res.data;
-      this.setState({
-        title: `Search with '${keyword}'`,
-        products: result,
-        loading: false,
+    axios
+      .get(this.context.url + '/api/customer/products/search/' + keyword)
+      .then((res) => {
+        const result = res.data;
+        this.setState({
+          title: `Search with '${keyword}'`,
+          products: result,
+          loading: false,
+        });
       });
-    });
   }
 }
 

@@ -69,7 +69,7 @@ class Login extends Component {
 
   // apis
   apiLogin(account) {
-    axios.post('/api/admin/login', account).then((res) => {
+    axios.post(this.context.url + '/api/admin/login', account).then((res) => {
       const result = res.data;
       if (result.success === true) {
         this.context.setToken(result.token);

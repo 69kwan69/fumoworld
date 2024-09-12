@@ -116,53 +116,61 @@ class CategoryDetail extends Component {
       }
     }
   }
-  
+
   // apis
   apiPostCategory(cate) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.post('/api/admin/categories', cate, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('OK BABY!');
-        this.apiGetCategories();
-      } else {
-        alert('SORRY BABY!');
-      }
-    });
+    axios
+      .post(this.context.url + '/api/admin/categories', cate, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('OK BABY!');
+          this.apiGetCategories();
+        } else {
+          alert('SORRY BABY!');
+        }
+      });
   }
 
   apiGetCategories() {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.get('/api/admin/categories', config).then((res) => {
-      const result = res.data;
-      this.props.updateCategories(result);
-    });
+    axios
+      .get(this.context.url + '/api/admin/categories', config)
+      .then((res) => {
+        const result = res.data;
+        this.props.updateCategories(result);
+      });
   }
 
   apiPutCategory(id, cate) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.put('/api/admin/categories/' + id, cate, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('OK BABY!');
-        this.apiGetCategories();
-      } else {
-        alert('SORRY BABY!');
-      }
-    });
+    axios
+      .put(this.context.url + '/api/admin/categories/' + id, cate, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('OK BABY!');
+          this.apiGetCategories();
+        } else {
+          alert('SORRY BABY!');
+        }
+      });
   }
 
   apiDeleteCategory(id) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.delete('/api/admin/categories/' + id, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('OK BABY!');
-        this.apiGetCategories();
-      } else {
-        alert('SORRY BABY!');
-      }
-    });
+    axios
+      .delete(this.context.url + '/api/admin/categories/' + id, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('OK BABY!');
+          this.apiGetCategories();
+        } else {
+          alert('SORRY BABY!');
+        }
+      });
   }
 }
 

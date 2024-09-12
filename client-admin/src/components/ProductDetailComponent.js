@@ -227,34 +227,41 @@ class ProductDetail extends Component {
   // apis
   apiPostProduct(prod) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.post('/api/admin/products', prod, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('OK BABY!');
-        this.apiGetProducts();
-      } else {
-        alert('SORRY BABY!');
-      }
-    });
+    axios
+      .post(this.context.url + '/api/admin/products', prod, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('OK BABY!');
+          this.apiGetProducts();
+        } else {
+          alert('SORRY BABY!');
+        }
+      });
   }
 
   apiDeleteProduct(id) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.delete('/api/admin/products/' + id, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('OK BABY!');
-        this.apiGetProducts();
-      } else {
-        alert('SORRY BABY!');
-      }
-    });
+    axios
+      .delete(this.context.url + '/api/admin/products/' + id, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('OK BABY!');
+          this.apiGetProducts();
+        } else {
+          alert('SORRY BABY!');
+        }
+      });
   }
 
   apiGetProducts() {
     const config = { headers: { 'x-access-token': this.context.token } };
     axios
-      .get('/api/admin/products?page=' + this.props.curPage, config)
+      .get(
+        this.context.url + '/api/admin/products?page=' + this.props.curPage,
+        config
+      )
       .then((res) => {
         const result = res.data;
         if (result.products.length !== 0) {
@@ -266,7 +273,10 @@ class ProductDetail extends Component {
         } else {
           const curPage = this.props.curPage - 1;
           axios
-            .get('/api/admin/products?page=' + curPage, config)
+            .get(
+              this.context.url + '/api/admin/products?page=' + curPage,
+              config
+            )
             .then((res) => {
               const result = res.data;
               this.props.updateProducts(
@@ -281,23 +291,27 @@ class ProductDetail extends Component {
 
   apiGetCategories() {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.get('/api/admin/categories', config).then((res) => {
-      const result = res.data;
-      this.setState({ categories: result });
-    });
+    axios
+      .get(this.context.url + '/api/admin/categories', config)
+      .then((res) => {
+        const result = res.data;
+        this.setState({ categories: result });
+      });
   }
 
   apiPutProduct(id, prod) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.put('/api/admin/products/' + id, prod, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('OK BABY!');
-        this.apiGetProducts();
-      } else {
-        alert('SORRY BABY!');
-      }
-    });
+    axios
+      .put(this.context.url + '/api/admin/products/' + id, prod, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('OK BABY!');
+          this.apiGetProducts();
+        } else {
+          alert('SORRY BABY!');
+        }
+      });
   }
 }
 export default ProductDetail;

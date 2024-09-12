@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import hero from '../assets/spinning-cirno.gif';
 import customer from '../assets/testimonials.jpg';
+import MyContext from '../contexts/MyContext';
 
 class Home extends Component {
+  static contextType = MyContext; // using this.context to access global state
+
   constructor(props) {
     super(props);
     this.state = {
@@ -110,14 +113,14 @@ class Home extends Component {
 
   // apis
   apiGetNewProducts() {
-    axios.get('/api/customer/products/new').then((res) => {
+    axios.get(this.context.url + '/api/customer/products/new').then((res) => {
       const result = res.data;
       this.setState({ newprods: result });
     });
   }
 
   apiGetHotProducts() {
-    axios.get('/api/customer/products/hot').then((res) => {
+    axios.get(this.context.url + '/api/customer/products/hot').then((res) => {
       const result = res.data;
       this.setState({ hotprods: result });
     });

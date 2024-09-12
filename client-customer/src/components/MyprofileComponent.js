@@ -139,15 +139,17 @@ class Myprofile extends Component {
   // apis
   apiPutCustomer(id, customer) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.put('/api/customer/customers/' + id, customer, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('Profile updated!');
-        this.context.setCustomer(result);
-      } else {
-        alert("There's something wrong, please try again!");
-      }
-    });
+    axios
+      .put(this.context.url + '/api/customer/customers/' + id, customer, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('Profile updated!');
+          this.context.setCustomer(result);
+        } else {
+          alert("There's something wrong, please try again!");
+        }
+      });
   }
 }
 

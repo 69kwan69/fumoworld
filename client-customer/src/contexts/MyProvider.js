@@ -7,6 +7,7 @@ class MyProvider extends Component {
     this.state = {
       // global state
       // variables
+      url: 'https://fumoworld.onrender.com',
       token: '',
       customer: null,
       mycart: [],

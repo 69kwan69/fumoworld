@@ -188,49 +188,57 @@ class Category extends Component {
   // apis
   apiGetCategories() {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.get('/api/admin/categories', config).then((res) => {
-      const result = res.data;
-      this.setState({ categories: result });
-    });
+    axios
+      .get(`${this.context.url}/api/admin/categories`, config)
+      .then((res) => {
+        const result = res.data;
+        this.setState({ categories: result });
+      });
   }
 
   apiPostCategory(cate) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.post('/api/admin/categories', cate, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('New category added!');
-        this.apiGetCategories();
-      } else {
-        alert('Add failed. Please try again!');
-      }
-    });
+    axios
+      .post(`${this.context.url}/api/admin/categories`, cate, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('New category added!');
+          this.apiGetCategories();
+        } else {
+          alert('Add failed. Please try again!');
+        }
+      });
   }
 
   apiPutCategory(id, cate) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.put('/api/admin/categories/' + id, cate, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('Category updated successfully!');
-        this.apiGetCategories();
-      } else {
-        alert('Update failed. Please try again!');
-      }
-    });
+    axios
+      .put(`${this.context.url}/api/admin/categories/` + id, cate, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('Category updated successfully!');
+          this.apiGetCategories();
+        } else {
+          alert('Update failed. Please try again!');
+        }
+      });
   }
 
   apiDeleteCategory(id) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.delete('/api/admin/categories/' + id, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('Category deleted successfully!');
-        this.apiGetCategories();
-      } else {
-        alert('Delete failed. Please try again!');
-      }
-    });
+    axios
+      .delete(`${this.context.url}/api/admin/categories/` + id, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('Category deleted successfully!');
+          this.apiGetCategories();
+        } else {
+          alert('Delete failed. Please try again!');
+        }
+      });
   }
 }
 

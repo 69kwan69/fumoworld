@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import MyContext from '../contexts/MyContext';
 
 class Active extends Component {
+  static contextType = MyContext; // using this.context to access global state
+
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +64,7 @@ class Active extends Component {
   // apis
   apiActive(id, token) {
     const body = { id: id, token: token };
-    axios.post('/api/customer/active', body).then((res) => {
+    axios.post(this.context.url + '/api/customer/active', body).then((res) => {
       const result = res.data;
       if (result) {
         alert('Account ativated!');

@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Active from './ActiveComponent';
+import MyContext from '../contexts/MyContext';
 
 class Signup extends Component {
+  static contextType = MyContext; // using this.context to access global state
+
   constructor(props) {
     super(props);
     this.state = {
@@ -120,10 +123,12 @@ class Signup extends Component {
 
   // apis
   apiSignup(account) {
-    axios.post('/api/customer/signup', account).then((res) => {
-      const result = res.data;
-      alert(result.message);
-    });
+    axios
+      .post(this.context.url + '/api/customer/signup', account)
+      .then((res) => {
+        const result = res.data;
+        alert(result.message);
+      });
   }
 }
 

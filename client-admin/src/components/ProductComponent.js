@@ -339,61 +339,71 @@ class Product extends Component {
   // apis
   apiGetCategories() {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.get('/api/admin/categories', config).then((res) => {
-      const result = res.data;
-      this.setState({ categories: result });
-    });
+    axios
+      .get(this.context.url + '/api/admin/categories', config)
+      .then((res) => {
+        const result = res.data;
+        this.setState({ categories: result });
+      });
   }
 
   apiGetProducts(page) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.get('/api/admin/products?page=' + page, config).then((res) => {
-      const result = res.data;
-      this.setState({
-        products: result.products,
-        noPages: result.noPages,
-        curPage: result.curPage,
+    axios
+      .get(this.context.url + '/api/admin/products?page=' + page, config)
+      .then((res) => {
+        const result = res.data;
+        this.setState({
+          products: result.products,
+          noPages: result.noPages,
+          curPage: result.curPage,
+        });
       });
-    });
   }
 
   apiPostProduct(prod) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.post('/api/admin/products', prod, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('New product added!');
-        this.apiGetProducts();
-      } else {
-        alert('Add failed. Please try again!');
-      }
-    });
+    axios
+      .post(this.context.url + '/api/admin/products', prod, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('New product added!');
+          this.apiGetProducts();
+        } else {
+          alert('Add failed. Please try again!');
+        }
+      });
   }
 
   apiDeleteProduct(id) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.delete('/api/admin/products/' + id, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('Product deleted successfully!');
-        this.apiGetProducts();
-      } else {
-        alert('Delete failed. Please try again!');
-      }
-    });
+    axios
+      .delete(this.context.url + '/api/admin/products/' + id, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('Product deleted successfully!');
+          this.apiGetProducts();
+        } else {
+          alert('Delete failed. Please try again!');
+        }
+      });
   }
 
   apiPutProduct(id, prod) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.put('/api/admin/products/' + id, prod, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('Product updated successfully!');
-        this.apiGetProducts();
-      } else {
-        alert('Update failed. Please try again!');
-      }
-    });
+    axios
+      .put(this.context.url + '/api/admin/products/' + id, prod, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('Product updated successfully!');
+          this.apiGetProducts();
+        } else {
+          alert('Update failed. Please try again!');
+        }
+      });
   }
 }
 

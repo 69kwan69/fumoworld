@@ -122,16 +122,18 @@ class Mycart extends Component {
   apiCheckout(total, items, customer) {
     const body = { total: total, items: items, customer: customer };
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.post('/api/customer/checkout', body, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert('Create order successfully!');
-        this.context.setMycart([]);
-        this.props.navigate('/home');
-      } else {
-        alert('There something wrong, please try again!');
-      }
-    });
+    axios
+      .post(this.context.url + '/api/customer/checkout', body, config)
+      .then((res) => {
+        const result = res.data;
+        if (result) {
+          alert('Create order successfully!');
+          this.context.setMycart([]);
+          this.props.navigate('/home');
+        } else {
+          alert('There something wrong, please try again!');
+        }
+      });
   }
 }
 

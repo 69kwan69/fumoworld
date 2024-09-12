@@ -74,16 +74,18 @@ class Login extends Component {
 
   // apis
   apiLogin(account) {
-    axios.post('/api/customer/login', account).then((res) => {
-      const result = res.data;
-      if (result.success === true) {
-        this.context.setToken(result.token);
-        this.context.setCustomer(result.customer);
-        this.props.navigate('/home');
-      } else {
-        alert(result.message);
-      }
-    });
+    axios
+      .post(this.context.url + '/api/customer/login', account)
+      .then((res) => {
+        const result = res.data;
+        if (result.success === true) {
+          this.context.setToken(result.token);
+          this.context.setCustomer(result.customer);
+          this.props.navigate('/home');
+        } else {
+          alert(result.message);
+        }
+      });
   }
 }
 
